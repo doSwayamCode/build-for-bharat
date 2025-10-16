@@ -18,8 +18,12 @@ const API_KEY = '579b464db66ec23bdd0000012715ae2f290a4da146029413f73f90d7';
 const BASE_URL = 'https://api.data.gov.in/resource/579b464db66ec23bdd0000012715ae2f290a4da146029413f73f90d7';
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "*",
+    credentials: true,
+  })
+);
 
 // Cache storage
 const cache = new Map();

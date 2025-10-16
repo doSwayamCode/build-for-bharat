@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { API_URL } from "../config";
 
 interface State {
   code: string;
@@ -25,8 +26,8 @@ const StructuredHomePage: React.FC = () => {
   useEffect(() => {
     // Fetch both states and national stats from API
     Promise.all([
-      fetch('http://localhost:3001/api/states').then(res => res.json()),
-      fetch('http://localhost:3001/api/stats').then(res => res.json())
+      fetch(`${API_URL}/api/states`).then(res => res.json()),
+      fetch(`${API_URL}/api/stats`).then(res => res.json())
     ])
       .then(([statesData, statsData]) => {
         if (statesData.success && statesData.data) {

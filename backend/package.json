@@ -4,7 +4,7 @@
   "description": "Backend API for MGNREGA District Performance Portal",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node server.js",
     "dev": "nodemon src/app.js",
     "start:prod": "NODE_ENV=production node src/app.js",
     "start:production": "node production-server.js",

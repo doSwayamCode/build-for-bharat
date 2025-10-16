@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 
 interface District {
   code: string;
@@ -28,7 +29,7 @@ const SimpleStatePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/states/${stateCode}`)
+    fetch(`${API_URL}/api/states/${stateCode}`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.data) {
