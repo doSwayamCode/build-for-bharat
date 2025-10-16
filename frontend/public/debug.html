@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGNREGA Debug Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2B5A33; }
+        h2 { color: #333; font-size: 18px; }
+        .success { color: #27ae60; font-weight: bold; }
+        .error { color: #e74c3c; font-weight: bold; }
+        .info { color: #666; font-size: 14px; }
+        button {
+            background: #2B5A33;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover { background: #1e4024; }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 MGNREGA API Debug Test</h1>
+    
+    <div class="test-box">
+        <h2>Environment Info</h2>
+        <p class="info"><strong>Hostname:</strong> <span id="hostname"></span></p>
+        <p class="info"><strong>Is Development:</strong> <span id="isDev"></span></p>
+        <p class="info"><strong>API URL:</strong> <span id="apiUrl"></span></p>
+    </div>
+
+    <div class="test-box">
+        <h2>Test 1: Fetch States</h2>
+        <button onclick="testStates()">Test States API</button>
+        <p id="statesResult" class="info">Click button to test</p>
+        <pre id="statesData"></pre>
+    </div>
+
+    <div class="test-box">
+        <h2>Test 2: Fetch Bihar State</h2>
+        <button onclick="testBihar()">Test Bihar API</button>
+        <p id="biharResult" class="info">Click button to test</p>
+        <pre id="biharData"></pre>
+    </div>
+
+    <div class="test-box">
+        <h2>Test 3: Fetch National Stats</h2>
+        <button onclick="testStats()">Test Stats API</button>
+        <p id="statsResult" class="info">Click button to test</p>
+        <pre id="statsData"></pre>
+    </div>
+
+    <div class="test-box">
+        <h2>Test 4: CORS Test</h2>
+        <button onclick="testCORS()">Test CORS</button>
+        <p id="corsResult" class="info">Click button to test</p>
+        <pre id="corsData"></pre>
+    </div>
+
+    <script>
+        // Detect environment
+        const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_URL = isDevelopment ? 'http://localhost:3001' : 'https://mgnrega-backend.onrender.com';
+
+        // Display environment info
+        document.getElementById('hostname').textContent = window.location.hostname;
+        document.getElementById('isDev').textContent = isDevelopment ? 'Yes (localhost)' : 'No (production)';
+        document.getElementById('apiUrl').textContent = API_URL;
+
+        async function testStates() {
+            const resultEl = document.getElementById('statesResult');
+            const dataEl = document.getElementById('statesData');
+            
+            resultEl.textContent = 'Testing...';
+            resultEl.className = 'info';
+            dataEl.textContent = '';
+
+            try {
+                console.log('Fetching from:', `${API_URL}/api/states`);
+                const response = await fetch(`${API_URL}/api/states`);
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data received:', data);
+                
+                resultEl.textContent = `✅ SUCCESS - Received ${data.data?.length || 0} states`;
+                resultEl.className = 'success';
+                dataEl.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+                resultEl.textContent = `❌ ERROR: ${error.message}`;
+                resultEl.className = 'error';
+                dataEl.textContent = error.stack || error.message;
+            }
+        }
+
+        async function testBihar() {
+            const resultEl = document.getElementById('biharResult');
+            const dataEl = document.getElementById('biharData');
+            
+            resultEl.textContent = 'Testing...';
+            resultEl.className = 'info';
+            dataEl.textContent = '';
+
+            try {
+                console.log('Fetching from:', `${API_URL}/api/states/BIH`);
+                const response = await fetch(`${API_URL}/api/states/BIH`);
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data received:', data);
+                
+                resultEl.textContent = `✅ SUCCESS - Received Bihar data with ${data.data?.districts?.length || 0} districts`;
+                resultEl.className = 'success';
+                dataEl.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+                resultEl.textContent = `❌ ERROR: ${error.message}`;
+                resultEl.className = 'error';
+                dataEl.textContent = error.stack || error.message;
+            }
+        }
+
+        async function testStats() {
+            const resultEl = document.getElementById('statsResult');
+            const dataEl = document.getElementById('statsData');
+            
+            resultEl.textContent = 'Testing...';
+            resultEl.className = 'info';
+            dataEl.textContent = '';
+
+            try {
+                console.log('Fetching from:', `${API_URL}/api/stats`);
+                const response = await fetch(`${API_URL}/api/stats`);
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data received:', data);
+                
+                resultEl.textContent = `✅ SUCCESS - Received national statistics`;
+                resultEl.className = 'success';
+                dataEl.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+                resultEl.textContent = `❌ ERROR: ${error.message}`;
+                resultEl.className = 'error';
+                dataEl.textContent = error.stack || error.message;
+            }
+        }
+
+        async function testCORS() {
+            const resultEl = document.getElementById('corsResult');
+            const dataEl = document.getElementById('corsData');
+            
+            resultEl.textContent = 'Testing CORS...';
+            resultEl.className = 'info';
+            dataEl.textContent = '';
+
+            try {
+                const response = await fetch(`${API_URL}/api/states`, {
+                    method: 'OPTIONS'
+                });
+                
+                const corsHeaders = {
+                    'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                    'Access-Control-Allow-Credentials': response.headers.get('Access-Control-Allow-Credentials'),
+                    'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods')
+                };
+                
+                resultEl.textContent = `✅ CORS Headers Received`;
+                resultEl.className = 'success';
+                dataEl.textContent = JSON.stringify(corsHeaders, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+                resultEl.textContent = `❌ CORS ERROR: ${error.message}`;
+                resultEl.className = 'error';
+                dataEl.textContent = error.stack || error.message;
+            }
+        }
+
+        // Auto-test on page load
+        window.addEventListener('load', () => {
+            console.log('=== MGNREGA Debug Test Page Loaded ===');
+            console.log('Hostname:', window.location.hostname);
+            console.log('Is Development:', isDevelopment);
+            console.log('API URL:', API_URL);
+        });
+    </script>
+</body>
+</html>
