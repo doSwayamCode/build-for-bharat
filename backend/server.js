@@ -276,17 +276,18 @@ app.get('/api/states/:stateCode', async (req, res) => {
     }
     
     // Calculate totals from districts
-    const totalWorkers = districts.reduce((sum, d) => sum + (d.total_workers || 0), 0);
-    const totalWorks = districts.reduce((sum, d) => sum + (d.active_works || 0), 0);
+    const totalJobCards = districts.reduce((sum, d) => sum + (d.job_cards || 0), 0);
+    const totalActiveWorkers = districts.reduce((sum, d) => sum + (d.active_workers || 0), 0);
+    const totalWageExpenditure = districts.reduce((sum, d) => sum + (d.wage_expenditure || 0), 0);
     
     const stateInfo = {
       code: state.code,
       name: state.name,
       hindi_name: state.hindi_name,
       district_count: districts.length,
-      total_job_cards: Math.floor(totalWorkers * 1.2), // Estimate job cards
-      total_active_workers: totalWorkers,
-      total_wage_expenditure: totalWorkers * 220 * 100 // Estimate expenditure
+      total_job_cards: totalJobCards,
+      total_active_workers: totalActiveWorkers,
+      total_wage_expenditure: totalWageExpenditure
     };
     
     res.json({

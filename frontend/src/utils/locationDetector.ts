@@ -13,7 +13,7 @@ interface DistrictLocation {
   radius: number; // km
 }
 
-// District coordinates (approximate center points)
+// District coordinates (approximate center points) - UPDATED TO MATCH BACKEND CODES
 const DISTRICT_LOCATIONS: DistrictLocation[] = [
   // Rajasthan
   { code: 'RAJ001', name: 'Jaipur', stateCode: 'RAJ', stateName: 'Rajasthan', latitude: 26.9124, longitude: 75.7873, radius: 50 },
@@ -26,15 +26,15 @@ const DISTRICT_LOCATIONS: DistrictLocation[] = [
   { code: 'UP001', name: 'Lucknow', stateCode: 'UP', stateName: 'Uttar Pradesh', latitude: 26.8467, longitude: 80.9462, radius: 50 },
   { code: 'UP002', name: 'Kanpur', stateCode: 'UP', stateName: 'Uttar Pradesh', latitude: 26.4499, longitude: 80.3319, radius: 50 },
   { code: 'UP003', name: 'Agra', stateCode: 'UP', stateName: 'Uttar Pradesh', latitude: 27.1767, longitude: 78.0081, radius: 40 },
-  { code: 'UP004', name: 'Varanasi', stateCode: 'UP', stateName: 'Uttar Pradesh', latitude: 25.3176, longitude: 82.9739, radius: 40 },
-  { code: 'UP005', name: 'Allahabad', stateCode: 'UP', stateName: 'Uttar Pradesh', latitude: 25.4358, longitude: 81.8463, radius: 40 },
+  { code: 'UP004', name: 'Meerut', stateCode: 'UP', stateName: 'Uttar Pradesh', latitude: 28.9845, longitude: 77.7064, radius: 40 },
+  { code: 'UP005', name: 'Varanasi', stateCode: 'UP', stateName: 'Uttar Pradesh', latitude: 25.3176, longitude: 82.9739, radius: 40 },
   
   // Bihar
   { code: 'BIH001', name: 'Patna', stateCode: 'BIH', stateName: 'Bihar', latitude: 25.5941, longitude: 85.1376, radius: 50 },
   { code: 'BIH002', name: 'Gaya', stateCode: 'BIH', stateName: 'Bihar', latitude: 24.7955, longitude: 84.9994, radius: 40 },
   { code: 'BIH003', name: 'Muzaffarpur', stateCode: 'BIH', stateName: 'Bihar', latitude: 26.1225, longitude: 85.3906, radius: 40 },
-  { code: 'BIH004', name: 'Bhagalpur', stateCode: 'BIH', stateName: 'Bihar', latitude: 25.2425, longitude: 86.9842, radius: 40 },
-  { code: 'BIH005', name: 'Darbhanga', stateCode: 'BIH', stateName: 'Bihar', latitude: 26.1542, longitude: 85.8918, radius: 40 },
+  { code: 'BIH004', name: 'Darbhanga', stateCode: 'BIH', stateName: 'Bihar', latitude: 26.1542, longitude: 85.8918, radius: 40 },
+  { code: 'BIH005', name: 'Bhagalpur', stateCode: 'BIH', stateName: 'Bihar', latitude: 25.2425, longitude: 86.9842, radius: 40 },
   
   // Madhya Pradesh
   { code: 'MP001', name: 'Bhopal', stateCode: 'MP', stateName: 'Madhya Pradesh', latitude: 23.2599, longitude: 77.4126, radius: 50 },
@@ -46,9 +46,9 @@ const DISTRICT_LOCATIONS: DistrictLocation[] = [
   // Odisha
   { code: 'OD001', name: 'Bhubaneswar', stateCode: 'OD', stateName: 'Odisha', latitude: 20.2961, longitude: 85.8245, radius: 50 },
   { code: 'OD002', name: 'Cuttack', stateCode: 'OD', stateName: 'Odisha', latitude: 20.4625, longitude: 85.8830, radius: 40 },
-  { code: 'OD003', name: 'Puri', stateCode: 'OD', stateName: 'Odisha', latitude: 19.8135, longitude: 85.8312, radius: 40 },
+  { code: 'OD003', name: 'Berhampur', stateCode: 'OD', stateName: 'Odisha', latitude: 19.3150, longitude: 84.7941, radius: 40 },
   { code: 'OD004', name: 'Sambalpur', stateCode: 'OD', stateName: 'Odisha', latitude: 21.4669, longitude: 83.9812, radius: 40 },
-  { code: 'OD005', name: 'Balasore', stateCode: 'OD', stateName: 'Odisha', latitude: 21.4934, longitude: 86.9336, radius: 40 },
+  { code: 'OD005', name: 'Rourkela', stateCode: 'OD', stateName: 'Odisha', latitude: 22.2604, longitude: 84.8536, radius: 40 },
   
   // Jharkhand
   { code: 'JH001', name: 'Ranchi', stateCode: 'JH', stateName: 'Jharkhand', latitude: 23.3441, longitude: 85.3096, radius: 50 },
@@ -60,9 +60,9 @@ const DISTRICT_LOCATIONS: DistrictLocation[] = [
   // West Bengal
   { code: 'WB001', name: 'Kolkata', stateCode: 'WB', stateName: 'West Bengal', latitude: 22.5726, longitude: 88.3639, radius: 50 },
   { code: 'WB002', name: 'Howrah', stateCode: 'WB', stateName: 'West Bengal', latitude: 22.5958, longitude: 88.2636, radius: 40 },
-  { code: 'WB003', name: 'Darjeeling', stateCode: 'WB', stateName: 'West Bengal', latitude: 27.0410, longitude: 88.2663, radius: 40 },
-  { code: 'WB004', name: 'Siliguri', stateCode: 'WB', stateName: 'West Bengal', latitude: 26.7271, longitude: 88.3953, radius: 40 },
-  { code: 'WB005', name: 'Durgapur', stateCode: 'WB', stateName: 'West Bengal', latitude: 23.5204, longitude: 87.3119, radius: 40 },
+  { code: 'WB003', name: 'Durgapur', stateCode: 'WB', stateName: 'West Bengal', latitude: 23.5204, longitude: 87.3119, radius: 40 },
+  { code: 'WB004', name: 'Asansol', stateCode: 'WB', stateName: 'West Bengal', latitude: 23.6739, longitude: 86.9524, radius: 40 },
+  { code: 'WB005', name: 'Siliguri', stateCode: 'WB', stateName: 'West Bengal', latitude: 26.7271, longitude: 88.3953, radius: 40 },
 ];
 
 /**
