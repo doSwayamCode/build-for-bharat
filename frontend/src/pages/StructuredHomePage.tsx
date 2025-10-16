@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL } from "../config";
+import LocationDetectionBanner from '../components/LocationDetectionBanner';
 
 interface State {
   code: string;
@@ -280,6 +281,9 @@ const StructuredHomePage: React.FC = () => {
             Click on your state to view district-wise information
           </p>
         </div>
+
+        {/* Location Detection Banner */}
+        <LocationDetectionBanner />
 
         <div style={{ 
           display: 'grid', 
