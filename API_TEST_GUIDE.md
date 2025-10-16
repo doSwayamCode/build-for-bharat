@@ -1,14 +1,17 @@
 # 🧪 API Testing Guide
 
 ## Your Deployed Backend URL
+
 `https://mgnrega-backend.onrender.com`
 
 ---
 
 ## ⏳ **IMPORTANT: Wait for Deployment**
-After pushing code, Render takes **2-3 minutes** to redeploy. 
+
+After pushing code, Render takes **2-3 minutes** to redeploy.
 
 Check deployment status:
+
 1. Go to https://render.com/dashboard
 2. Click on `mgnrega-backend`
 3. Wait for "Live" status (green dot)
@@ -20,26 +23,33 @@ Check deployment status:
 Once deployed, test these URLs in your browser:
 
 ### 1. **Root Endpoint** (API Info)
+
 ```
 https://mgnrega-backend.onrender.com/
 ```
+
 **Expected:** JSON with API documentation
 
 ---
 
-### 2. **All States** 
+### 2. **All States**
+
 ```
 https://mgnrega-backend.onrender.com/api/states
 ```
+
 **Expected:** JSON array with 7 states (RAJ, UP, BIH, MP, OD, JH, WB)
 
 ---
 
 ### 3. **National Statistics**
+
 ```
 https://mgnrega-backend.onrender.com/api/stats
 ```
+
 **Expected:** JSON with:
+
 - total_job_cards
 - total_active_workers
 - total_work_completion_rate
@@ -48,17 +58,21 @@ https://mgnrega-backend.onrender.com/api/stats
 ---
 
 ### 4. **State Details** (Example: Rajasthan)
+
 ```
 https://mgnrega-backend.onrender.com/api/states/RAJ
 ```
+
 **Expected:** JSON with state info + 5 districts
 
 ---
 
 ### 5. **Health Check**
+
 ```
 https://mgnrega-backend.onrender.com/health
 ```
+
 **Expected:** JSON with server health status
 
 ---
@@ -66,15 +80,19 @@ https://mgnrega-backend.onrender.com/health
 ## ⚠️ **Common Issues**
 
 ### Issue: "Cannot GET /"
+
 **Reason:** Old deployment without root route
 **Solution:** Wait for new deployment to finish (2-3 minutes)
 
 ### Issue: Takes 30-60 seconds to load
+
 **Reason:** Free tier "cold start" - server was sleeping
 **Solution:** Normal for free tier, wait patiently
 
 ### Issue: Still showing error after waiting
-**Solution:** 
+
+**Solution:**
+
 1. Check Render dashboard logs
 2. Verify environment variables are set
 3. Make sure `PORT` is set to `10000`
@@ -84,6 +102,7 @@ https://mgnrega-backend.onrender.com/health
 ## 📊 **What Good Responses Look Like**
 
 ### Root Endpoint (`/`)
+
 ```json
 {
   "message": "MGNREGA Portal API",
@@ -101,6 +120,7 @@ https://mgnrega-backend.onrender.com/health
 ```
 
 ### States Endpoint (`/api/states`)
+
 ```json
 {
   "success": true,
@@ -138,6 +158,7 @@ https://mgnrega-backend.onrender.com/health
 Once all these endpoints work, you can deploy your frontend!
 
 The frontend will use environment variable:
+
 ```
 VITE_API_URL=https://mgnrega-backend.onrender.com
 ```
