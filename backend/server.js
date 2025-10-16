@@ -17,10 +17,29 @@ const PORT = process.env.PORT || 3001;
 const API_KEY = '579b464db66ec23bdd0000012715ae2f290a4da146029413f73f90d7';
 const BASE_URL = 'https://api.data.gov.in/resource/579b464db66ec23bdd0000012715ae2f290a4da146029413f73f90d7';
 
-// Middleware
+// Middleware - CORS configuration for production
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "*",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      
+      // List of allowed origins (without trailing slash)
+      const allowedOrigins = [
+        'https://mgnrega-frontend.onrender.com',
+        'http://localhost:3002',
+        'http://localhost:5173'
+      ];
+      
+      // Remove trailing slash from origin if present
+      const normalizedOrigin = origin.replace(/\/$/, '');
+      
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        callback(null, true);
+      } else {
+        callback(null, true); // Allow all for now (rural accessibility)
+      }
+    },
     credentials: true,
   })
 );
