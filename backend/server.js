@@ -194,6 +194,23 @@ function getHindiStateName(englishName) {
 
 // API Routes
 
+// Root route - API documentation
+app.get('/', (req, res) => {
+  res.json({
+    message: 'MGNREGA Portal API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      states: '/api/states',
+      stateDetails: '/api/states/:stateCode',
+      districts: '/api/states/:stateCode/districts',
+      nationalStats: '/api/stats',
+      health: '/health'
+    },
+    example: 'Try: /api/states or /api/stats'
+  });
+});
+
 // Get all states
 app.get('/api/states', async (req, res) => {
   try {
