@@ -27,17 +27,26 @@ const SimpleStatePage: React.FC = () => {
   const navigate = useNavigate();
   const [stateData, setStateData] = useState<{ state: StateInfo; districts: District[] } | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
+    console.log('Fetching from:', `${API_URL}/api/states/${stateCode}`);
     fetch(`${API_URL}/api/states/${stateCode}`)
-      .then(res => res.json())
+      .then(res => {
+        console.log('Response status:', res.status);
+        return res.json();
+      })
       .then(data => {
+        console.log('Data received:', data);
         if (data.success && data.data) {
           setStateData(data.data);
+        } else {
+          setError('No data received from API');
         }
       })
       .catch(err => {
-        console.error('Error:', err);
+        console.error('Fetch Error:', err);
+        setError(err.message);
       })
       .finally(() => setLoading(false));
   }, [stateCode]);
@@ -71,6 +80,17 @@ const SimpleStatePage: React.FC = () => {
         <h2 style={{ color: '#E74C3C', fontSize: '24px', fontWeight: '600' }}>
           State not found / राज्य नहीं मिला
         </h2>
+        {error && (
+          <p style={{ color: '#666', fontSize: '16px', marginTop: '10px' }}>
+            Error: {error}
+          </p>
+        )}
+        <p style={{ color: '#666', fontSize: '14px', marginTop: '10px' }}>
+          API URL: {API_URL}
+        </p>
+        <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>
+          State Code: {stateCode}
+        </p>
         <button
           onClick={() => navigate('/')}
           style={{

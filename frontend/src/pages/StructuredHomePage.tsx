@@ -25,11 +25,20 @@ const StructuredHomePage: React.FC = () => {
 
   useEffect(() => {
     // Fetch both states and national stats from API
+    console.log('Homepage - API_URL:', API_URL);
     Promise.all([
-      fetch(`${API_URL}/api/states`).then(res => res.json()),
-      fetch(`${API_URL}/api/stats`).then(res => res.json())
+      fetch(`${API_URL}/api/states`).then(res => {
+        console.log('States response status:', res.status);
+        return res.json();
+      }),
+      fetch(`${API_URL}/api/stats`).then(res => {
+        console.log('Stats response status:', res.status);
+        return res.json();
+      })
     ])
       .then(([statesData, statsData]) => {
+        console.log('States data:', statesData);
+        console.log('Stats data:', statsData);
         if (statesData.success && statesData.data) {
           setStates(statesData.data);
           setApiConnected(true);
